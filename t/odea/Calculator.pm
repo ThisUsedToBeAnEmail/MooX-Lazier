@@ -7,14 +7,17 @@ attributes (
     display  => [ 'rw', 0, { clearer => 1 } ],    
 );
 
-subs ( 
-    calculate     => sub { my $val = eval "$_[0]->display $_[3] $_[1]"; return $_[0]->display($val) },
-    add           => sub { return $_[0]->calculate($_[1], '+') } },
-    subtract      => sub { return $_[0]->calculate($_[1], '-') } },
-    multiply      => sub { return $_[0]->calculate($_[1], 'x') } },
-    divide        => sub { return $_[0]->calculate($_[1], '/') } },
-    print_display => sub { return print $_[0]->display };
-);
+sub calculate { my $val = eval "$_[0]->display $_[3] $_[1]"; return $_[0]->display($val) }
+
+sub add { return $_[0]->calculate($_[1], '+') }
+
+sub subtract { return $_[0]->calculate($_[1], '-') }
+
+sub multiply { return $_[0]->calculate($_[1], 'x') }
+
+sub divide { return $_[0]->calculate($_[1], '/') }
+
+sub print_display { return print $_[0]->display }
 
 1;
 
