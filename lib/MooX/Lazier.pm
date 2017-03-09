@@ -3,6 +3,24 @@ package MooX::Lazier;
 use 5.006;
 use strict;
 use warnings;
+BEGIN { use MooX::ReturnModifiers qw/return_modifiers/; }
+
+use Carp qw/croak/;
+
+our $VERSION = '0.01';
+
+sub import {
+    my $target = caller;
+    my %modifiers = return_modifiers($target);
+
+
+    use Data::Dumper;
+    warn Dumper \%modifiers;
+
+    return 1;
+}
+
+
 
 =head1 NAME
 
@@ -13,9 +31,6 @@ MooX::Lazier - The great new MooX::Lazier!
 Version 0.01
 
 =cut
-
-our $VERSION = '0.01';
-
 
 =head1 SYNOPSIS
 
@@ -32,22 +47,6 @@ Perhaps a little code snippet.
 
 A list of functions that can be exported.  You can delete this section
 if you don't export anything, such as for a purely object-oriented module.
-
-=head1 SUBROUTINES/METHODS
-
-=head2 function1
-
-=cut
-
-sub function1 {
-}
-
-=head2 function2
-
-=cut
-
-sub function2 {
-}
 
 =head1 AUTHOR
 
